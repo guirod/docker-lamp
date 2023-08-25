@@ -2,7 +2,7 @@ volumes:
     db-data:
 
 services:
-  simple-lamp-mysql:
+  docker-lamp-mysql:
     image: mysql:8
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -13,7 +13,7 @@ services:
     ports:
       - "3306:3306"
   
-  simple-lamp-php:
+  docker-lamp-php:
     build: .
     volumes:
       - ../:/var/www/html/
