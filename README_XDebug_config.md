@@ -93,3 +93,9 @@ Vous pouvez maintenant lancer le debugger via vscode en utilisant « lister on d
 Vous n’avez plus qu’à mettre des points d’arrêt en cliquant à gauche du bout de code sur lequel vous souhaitez vous arrêter puis vous pourrez faire du pas-à-pas à partir d’ici. 
 
 [Debugger en action](https://github.com/guirod/readme-images/blob/main/docker-lamp/debug.png?raw=true)
+
+## Troubleshoot
+Attention, si vous avez des soucis de PHP Cli :
+    - Interpréteur PHP intéractif qui stall
+    - Composer qui stall
+Vous devez lancer le débugger. 
