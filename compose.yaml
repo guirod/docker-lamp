@@ -14,7 +14,8 @@ services:
       - "3306:3306"
 
   docker-lamp-php:
-    build: .
+    build: 
+      dockerfile: Dockerfile-apache
     volumes:
       - ../:/var/www/html/
     ports:
@@ -31,3 +32,17 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+
+  node:
+    image: node:20
+    user: node
+    working_dir: "/home/node/app"
+    environment:
+      - NODE_ENV=production
+      - PORT=8888
+    volumes: 
+      - ../node_apps:/home/node/app
+    expose:
+      - "8888"
+    command: npm start
+
