@@ -1,19 +1,19 @@
 volumes:
-  db-data:
+  pgsql-data:
 
 services:
-  docker-lamp-mysql:
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
+  pgsql:
+    image: postgres:16
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: p@ssw0rd
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_USER: postgres
     volumes:
-      - db-data:/var/lib/mysql
+      - pgsql-data:/var/lib/postgresql
     ports:
-      - "3306:3306"
+      - "5432:5432"
 
-  docker-lamp-php:
+  php:
     build: .
     volumes:
       - ../:/var/www/html/
@@ -31,3 +31,9 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
