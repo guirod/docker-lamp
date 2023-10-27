@@ -1,8 +1,8 @@
 # docker-lamp
 A simple docker LAMP stack
 
-## Serveur MySQL
-La stack comprend une image docker de Mysql v8 (port 3306).
+## Serveur PostgreSQL
+La stack comprend une image docker de PostgreSQL 16 (port 5432).
 
 ## Serveur Apache
 Un serveur apache (par défaut sur le port 80) avec PHP 8.1. 
@@ -15,4 +15,6 @@ Met à disposition un serveur SMTP ainsi qu'une interface web de type webmail po
 Le serveur SMTP ne supporte pas le TLS, ne nécessite pas d'authentification et est accessible sur le port 1025.
 Le 'webmail' est accessible sur le port 8025 (http://127.0.0.1:8025/) 
 
+## Adminer
+Alternative à phpmyadmin. Je conseille toutefois d'utiliser un client comme HeidiSQL pour une meilleure ergonomie. 
 https://github.com/mailhog/MailHog
