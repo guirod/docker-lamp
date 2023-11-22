@@ -15,6 +15,7 @@ services:
 
   php8_mysql:
     build: .
+    restart: always
     volumes:
       - ../:/var/www/html/
     ports:
