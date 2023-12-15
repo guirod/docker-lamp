@@ -10,6 +10,8 @@ Ressources utilisées pour réaliser ce tutoriel :
 Ce guide va vous aider à installer XDebug : un debugger PHP.
 L’utilisation d’un debugger est une grande aide, car elle vous permettra de faire du « pas-à-pas » dans votre code et ainsi, connaitre la valeur des variables de votre application tout au long de l’exécution de votre code. 
 
+**Si vous utilisez le repo docker-lamp, vous pouvez directement passer à l'étape 5, xdebug est déjà configuré sur la stack.**
+
 ## 2 - Installation de XDebug 3 dans le container Docker
 Ajoutez les lignes suivantes dans le Dockerfile de votre container Apache pour installer et configurer XDebug : 
 ```dockerfile
