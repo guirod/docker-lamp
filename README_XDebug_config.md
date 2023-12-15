@@ -47,7 +47,8 @@ docker-compose up -d
 ## 5 - Installation de l’extension VSCode
 Installer l’extension « PHP Debug ».
 
-[screenshot extension PHP Debug](https://github.com/guirod/readme-images/blob/main/docker-lamp/PHP_debug_ext.png?raw=true)
+![screenshot extension PHP Debug](https://raw.githubusercontent.com/guirod/readme-images/main/docker-lamp/PHP_debug_ext.png "screenshot extension PHP Debug")  
+
 
 ## 6- Configuration de VS Code
 Ouvrir Git Bash à la racine de votre Workspace et taper les commandes suivantes : 
@@ -88,14 +89,14 @@ Copiez le code suivant dans le fichier « launch.json » :
 ## Enjoy !
 Vous pouvez maintenant lancer le debugger via vscode en utilisant « lister on docker for xdebug » dans l’onglet de debug de vscode.
 
-[Listen on Docker for XDebug](https://github.com/guirod/readme-images/blob/main/docker-lamp/listen_on_docker.png?raw=true)
+![Listen on Docker for XDebug](https://raw.githubusercontent.com/guirod/readme-images/main/docker-lamp/listen_on_docker.png "Listen on Docker for XDebug")
 
 Vous n’avez plus qu’à mettre des points d’arrêt en cliquant à gauche du bout de code sur lequel vous souhaitez vous arrêter puis vous pourrez faire du pas-à-pas à partir d’ici. 
 
-[Debugger en action](https://github.com/guirod/readme-images/blob/main/docker-lamp/debug.png?raw=true)
+![Debugger en action](https://raw.githubusercontent.com/guirod/readme-images/main/docker-lamp/debug.png "Debugger en action")
 
 ## Troubleshoot
-Attention, si vous avez des soucis de PHP Cli :
+Attention, si vous avez des soucis de PHP Cli, notamment si vous utilisez l'extension docker qui connecte votre workspace à votre container (je déconseille, utiliser plutôt un volume partagé sur la machine hôte) :
     - Interpréteur PHP intéractif qui stall
     - Composer qui stall
 Vous devez lancer le débugger. 
