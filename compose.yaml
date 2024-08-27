@@ -1,22 +1,22 @@
 volumes:
   db-data:
-
 services:
   mysql8:
     image: mysql:8
     restart: always
+    container_name: mysql8
     environment:
       MYSQL_ROOT_PASSWORD: p@ssw0rd
     volumes:
       - db-data:/var/lib/mysql
     ports:
       - "3306:3306"
-
   php8_mysql:
     build: .
     restart: always
     volumes:
       - ../:/var/www/html/
+    container_name: php8_mysql
     ports:
       - "80:80"
     extra_hosts:
@@ -24,10 +24,37 @@ services:
     environment:
       XDEBUG_MODE: develop,debug
       XDEBUG_CONFIG: client_host=host.docker.internal start_with_request=yes
-
+    links:
+      - memcached
   mailhog:
     image: mailhog/mailhog:latest
+    container_name: mailhog
     restart: always
     ports:
       - "1025:1025"
       - "8025:8025"
+  varnish:
+    image: varnish:alpine
+    # build:
+    #   context: .
+    #   dockerfile: varnish.Dockerfile
+    container_name: varnish
+    restart: always
+    environment:
+      - VARNISH_BACKEND_HOST=localhost
+      - VARNISH_BACKEND_PORT=80
+      - VARNISH_SIZE=2G  
+    # volumes:
+    #   - ./default.vcl:/etc/varnish/default.vcl
+    tmpfs:
+      - /var/lib/varnish/varnishd:exec
+    command: "-p default_keep=300"
+    ports:
+      - 8080:80
+    depends_on: 
+      - php8_mysql
+  memcached:
+    container_name: memcached
+    image: memcached:latest
+    ports:
+        - "11211:11211"

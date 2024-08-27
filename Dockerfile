@@ -5,6 +5,19 @@ RUN apt-get update && apt-get upgrade -y
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN apt install -y libzip-dev && docker-php-ext-install zip
+# Install gd plugin
+RUN apt-get update && apt-get install -y \
+		libfreetype-dev \
+		libjpeg62-turbo-dev \
+		libpng-dev \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
+	&& docker-php-ext-install -j$(nproc) gd
+# Install imagick plugin
+RUN apt install -y --no-install-recommends --no-install-suggests libmagickwand-dev \
+    && pecl install imagick && docker-php-ext-enable imagick
+# Install exif intl plugin
+RUN docker-php-ext-install exif 
+RUN apt-get install -y libicu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
