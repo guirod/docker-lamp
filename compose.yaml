@@ -1,5 +1,6 @@
 volumes:
   db-data:
+  workspace:
 
 services:
   mariadb:
@@ -16,7 +17,7 @@ services:
     build: .
     restart: always
     volumes:
-      - ../:/var/www/html/
+      - workspace:/var/www/html/
     ports:
       - "80:80"
     extra_hosts:
