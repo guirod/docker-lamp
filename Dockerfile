@@ -5,7 +5,7 @@ RUN composer --version && php -v
 RUN apt-get update && apt-get upgrade -y
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN apt install -y libzip-dev p7zip-full && docker-php-ext-install zip
+RUN apt-get install -y libzip-dev p7zip-full && docker-php-ext-install zip
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
@@ -18,6 +18,14 @@ RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
 # Install Symfony CLI
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+# Extensions PHP diverses
+RUN apt-get install -y libxslt-dev
+RUN docker-php-ext-install xsl
+RUN apt-get install -y librabbitmq-dev && pecl install amqp && docker-php-ext-enable amqp
+RUN apt-get install -y libicu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
+RUN apt-get install -y libpng-dev && docker-php-ext-install gd
+RUN apt-get install -y libpq-dev && docker-php-ext-install pdo_pgsql
+RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 # Install NodeJS
 RUN apt-get update && apt-get install -y ca-certificates curl gnupg
 RUN mkdir -p /etc/apt/keyrings
