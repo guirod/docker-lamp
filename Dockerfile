@@ -14,6 +14,9 @@ RUN apt-get install git nano -y
 RUN rm /root/.bashrc
 RUN curl -o /root/.bashrc https://gist.githubusercontent.com/marioBonales/1637696/raw/93a33aa5f1893f46773483250214f8b8b496a270/.bashrc
 RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
+# Install Symfony CLI
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 # Install NodeJS
 RUN apt-get update && apt-get install -y ca-certificates curl gnupg
 RUN mkdir -p /etc/apt/keyrings
