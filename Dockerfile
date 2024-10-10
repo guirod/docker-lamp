@@ -1,10 +1,11 @@
 FROM php:8.3-apache
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Copier les identifiants git locaux dans le container
 RUN composer --version && php -v
 RUN apt-get update && apt-get upgrade -y
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN apt install -y libzip-dev && docker-php-ext-install zip
+RUN apt install -y libzip-dev p7zip-full && docker-php-ext-install zip
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
