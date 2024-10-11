@@ -1,5 +1,11 @@
 volumes:
   db-data:
+  workspace-wsl:
+    driver: local
+    driver_opts:
+      type: none
+      device: \\wsl.localhost\Ubuntu\home\ubuntu\WorkspaceWSL
+      o: bind
 
 services:
   mariadb:
@@ -16,10 +22,11 @@ services:
     build: .
     restart: always
     volumes:
-      - ../:/var/www/html/
+      - workspace-wsl:/var/www/html
       - ~/.gitconfig:/root/.gitconfig
     ports:
       - "80:80"
+      - "8000:8000"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
